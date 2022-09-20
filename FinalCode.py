@@ -6,11 +6,9 @@ LOCAL_FILE = 'local_copy.log'
 # Use urlretrieve() to fetch a remote copy and save into the local file path
 local_file, headers = urlretrieve(URL_PATH, LOCAL_FILE)
 
-# Alt.: supply an anonmymous callback function to print a simple progress bar to screen
-local_file, headers = urlretrieve(URL_PATH, LOCAL_FILE, lambda x,y,z: print('.', end='', flush=True))
-
 # Alt. 2: a progress bar with reduced output (every 1000 blocks)
-local_file, headers = urlretrieve(URL_PATH, LOCAL_FILE, lambda x,y,z: print('.', end='', flush=True) if x % 100 == 0 else False)
+urlretrieve(URL_PATH, LOCAL_FILE, lambda x, y, z: print('.', end='', flush=True) if x % 100 == 0 else False)
+
 
 def countrequests(startDate, endDate):
     count = 0
@@ -22,10 +20,13 @@ def countrequests(startDate, endDate):
                 count += 1
             if endDate in line:
                 break
-    print("Number of requests from " + startDate + " to " + endDate + ": " + str(count) + " requests")
+    print("Scan Complete:\nNumber of requests from " + startDate + " to " + endDate + ": " + str(count) + " requests")
     
     with open('local_copy.log') as fp:
         num_lines = sum(1 for line in fp if line.rstrip())
     print('Total lines:', num_lines) 
 
+
 countrequests("10/May/1995", "12/Oct/1995")
+
+input("Press Enter to exit:")
