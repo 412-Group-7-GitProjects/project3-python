@@ -24,7 +24,7 @@ def countrequests(startDate, endDate):
     
     with open('local_copy.log') as fp:
         num_lines = sum(1 for line in fp if line.rstrip())
-    print('Total lines:', num_lines) 
+    print('Total requests:', num_lines) 
 
 
 countrequests("10/May/1995", "12/Oct/1995")
